@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  backend:
+    container_name: patitas-backend
+
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+
+    ports:
+      - "8080:8080"
+
+    restart: unless-stopped
+
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
