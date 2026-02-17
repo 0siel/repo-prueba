@@ -1,0 +1,6 @@
+/backend/target/
+/backend/.mvn/
+/backend/.metadata/
+/backend/.idea/
+.vscode/
+node_modules/

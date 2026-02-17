@@ -1,0 +1,17 @@
+<!doctype html>
+<html ng-app="patitasApp">
+  <head>
+    <title>Veterinaria Patitas</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  </head>
+  <body ng-controller="MainCtrl">
+    <h1>{{ mensaje }}</h1>
+    <script>
+      angular
+        .module("patitasApp", [])
+        .controller("MainCtrl", function ($scope) {
+          $scope.mensaje = "¡Hola desde AngularJS en el Frontend!";
+        });
+    </script>
+  </body>
+</html>
