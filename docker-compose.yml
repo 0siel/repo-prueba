@@ -2,22 +2,19 @@ version: "3.8"
 
 services:
   oracle-db:
-    image: gvenzl/oracle-xe:21-slim-fast
+    image: gvenzl/oracle-xe:21-slim
     container_name: patitas-db
     environment:
       - ORACLE_PASSWORD=${DB_ROOT_PASSWORD}
       - APP_USER=${DB_USER}
-      - APP_PASSWORD=${DB_PASSWORD}
+      - APP_USER_PASSWORD=${DB_PASSWORD}
     ports:
       - "1521:1521"
     volumes:
       - oracle-data:/opt/oracle/oradata
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "/opt/oracle/checkDBStatus.sh"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      disable: true
 
   backend:
     container_name: patitas-backend
@@ -27,14 +24,13 @@ services:
     ports:
       - "8080:8080"
     environment:
+      - TZ=America/Mexico_City
       - SPRING_DATASOURCE_URL=jdbc:oracle:thin:@oracle-db:1521/XEPDB1
       - SPRING_DATASOURCE_USERNAME=${DB_USER}
       - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     depends_on:
-      condition: service_healthy
-      oracle-db:
-        condition: service_healthy
+      - oracle-db # <---
     restart: unless-stopped
 
 volumes:
