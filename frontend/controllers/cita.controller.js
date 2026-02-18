@@ -24,11 +24,11 @@
 
           $http.post(API.CITAS, body)
             .then(function (res) {
-              $scope.exito = 'Cita agendada con exito. Tu numero de folio es: ' + res.data.id + '. Guardalo para consultar tu cita.';
+              $scope.exito = '¡Cita agendada con éxito! Tu número de folio es: ' + res.data.id + '. Guárdalo para consultar tu cita.';
               $scope.cita = {};
             })
             .catch(function (err) {
-              $scope.error = ErrorHelper.extraer(err, 'Error al agendar la cita. Intentalo de nuevo.');
+              $scope.error = ErrorHelper.extraer(err, 'Error al agendar la cita. Inténtalo de nuevo.');
             })
             .finally(function () {
               $scope.enviando = false;

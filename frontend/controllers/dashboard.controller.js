@@ -55,7 +55,7 @@
               cita.nuevoEstado = cita.estadoCita;
               var detalle = ErrorHelper.extraer(err, '');
               $scope.error = 'Error al cambiar cita #' + cita.id + ' a ' + estadoIntentado
-                + (detalle ? ': ' + detalle : '. Verifica que el estado sea valido e intentalo de nuevo.');
+                + (detalle ? ': ' + detalle : '. Verifica que el estado sea válido e inténtalo de nuevo.');
             });
         };
 

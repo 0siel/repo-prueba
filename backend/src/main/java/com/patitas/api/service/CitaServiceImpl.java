@@ -105,7 +105,7 @@ public class CitaServiceImpl implements CitaServiceInt {
 
     private void validarDisponibilidad(LocalDateTime fecha) {
         if (citaRepository.existsByFechaCitaAndEstadoCita(fecha, EstadoCita.PENDIENTE)) {
-            throw new InvalidStateException("Ya existe una cita en estado PENDIENTE para la fecha y hora seleccionada.");
+            throw new InvalidStateException("Ya exist una cita en estado PENDIENTE para la fecha y hora seleccionada.");
         }
     }
 

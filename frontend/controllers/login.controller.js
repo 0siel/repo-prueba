@@ -23,8 +23,8 @@
             })
             .catch(function (err) {
               $scope.error = (err.status === 401)
-                ? 'Usuario o contrasena incorrectos.'
-                : 'Error al iniciar sesion. Intentalo de nuevo.';
+                ? 'Usuario o contraseña incorrectos.'
+                : 'Error al iniciar sesión. Inténtalo de nuevo.';
             })
             .finally(function () {
               $scope.enviando = false;

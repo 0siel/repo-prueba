@@ -19,8 +19,8 @@
             })
             .catch(function (err) {
               $scope.error = (err.status === 404)
-                ? 'No se encontro ninguna cita con el folio ' + $scope.folio + '.'
-                : ErrorHelper.extraer(err, 'Error al buscar la cita. Intentalo de nuevo.');
+                ? 'No se encontró ninguna cita con el folio ' + $scope.folio + '.'
+                : ErrorHelper.extraer(err, 'Error al buscar la cita. Inténtalo de nuevo.');
             });
         };
       }

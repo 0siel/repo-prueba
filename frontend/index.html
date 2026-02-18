@@ -4,20 +4,20 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Veterinaria Patitas</title>
-    <meta name="description" content="Clinica veterinaria Patitas - Agenda tu cita en linea.">
+    <meta name="description" content="Clínica veterinaria Patitas - Agenda tu cita en línea.">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
 
     <header class="navbar" ng-controller="NavbarController">
-      <h1><a href="#!/" class="navbar-brand">Veterinaria Patitas</a></h1>
+      <h1><a href="#!/" class="navbar-brand">Veterinaria Patitas 🐾</a></h1>
       <nav>
         <span ng-if="estaLogueado()" class="navbar-user">
           <a href="#!/dashboard" class="navbar-link">Panel</a>
           <span class="navbar-username">{{ obtenerUsuario() }}</span>
-          <button class="btn-login" ng-click="cerrarSesion()">Cerrar Sesion</button>
+          <button class="btn-login" ng-click="cerrarSesion()">Cerrar Sesión</button>
         </span>
-        <a href="#!/login" class="btn-login" ng-if="!estaLogueado()">Iniciar Sesion</a>
+        <a href="#!/login" class="btn-login" ng-if="!estaLogueado()">Iniciar Sesión</a>
       </nav>
     </header>
 

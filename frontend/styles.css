@@ -60,10 +60,6 @@ body {
   font-size: 0.9rem;
 }
 
-.navbar-username {
-  font-weight: 600;
-}
-
 /* --------------- Hero Section ---------- */
 .hero {
   text-align: center;
@@ -82,13 +78,6 @@ body {
   opacity: 0.9;
   max-width: 500px;
   margin: 0 auto;
-}
-
-.hero-actions {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  margin-top: 1.5rem;
 }
 
 /* ------------- Services Section ---------- */
@@ -116,6 +105,11 @@ body {
   background: white;
   border-radius: 10px;
   padding: 1.5rem;
+}
+
+.servicio-card .icono {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .servicio-card h4 {
