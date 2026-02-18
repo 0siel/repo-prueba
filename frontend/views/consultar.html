@@ -1,0 +1,33 @@
+<section class="form-section">
+  <h2>Consultar Cita</h2>
+  <p>Ingresa tu numero de folio para ver el estado de tu cita.</p>
+
+  <div class="alert alert-error" ng-if="error">
+    {{ error }}
+  </div>
+
+  <form ng-submit="buscar()" class="consultar-form">
+    <div class="form-group">
+      <label for="folio">Numero de folio</label>
+      <input type="number" id="folio" ng-model="folio" required placeholder="Ej: 1" min="1">
+    </div>
+    <button type="submit" ng-disabled="!folio">Buscar</button>
+  </form>
+
+  <div class="cita-resultado" ng-if="cita">
+    <h3>Cita #{{ cita.id }}</h3>
+    <table class="detalle-table">
+      <tr><td><strong>Cliente</strong></td><td>{{ cita.nombreCliente }}</td></tr>
+      <tr><td><strong>Mascota</strong></td><td>{{ cita.nombreMascota }}</td></tr>
+      <tr><td><strong>Telefono</strong></td><td>{{ cita.numeroTelefono }}</td></tr>
+      <tr><td><strong>Motivo</strong></td><td>{{ cita.razonCita }}</td></tr>
+      <tr><td><strong>Fecha</strong></td><td>{{ cita.fechaCita | date:'dd/MM/yyyy HH:mm' }}</td></tr>
+      <tr>
+        <td><strong>Estado</strong></td>
+        <td><span class="badge" ng-class="badgeClass(cita.estadoCita)">{{ cita.estadoCita }}</span></td>
+      </tr>
+    </table>
+  </div>
+
+  <p class="back-link"><a href="#!/">Volver al inicio</a></p>
+</section>

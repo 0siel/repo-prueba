@@ -1,0 +1,75 @@
+<section class="form-section">
+  <h2>Agendar Cita</h2>
+
+  <div class="alert alert-success" ng-if="exito">
+    {{ exito }}
+  </div>
+
+  <div class="alert alert-error" ng-if="error">
+    {{ error }}
+  </div>
+
+  <form name="citaForm" ng-submit="enviar()" novalidate>
+
+    <div class="form-group">
+      <label for="nombreCliente">Nombre del cliente</label>
+      <input type="text" id="nombreCliente" name="nombreCliente"
+             ng-model="cita.nombreCliente"
+             required maxlength="100" placeholder="Ej: Juan Perez">
+      <span class="field-error"
+            ng-show="citaForm.nombreCliente.$touched && citaForm.nombreCliente.$error.required">
+        Campo obligatorio
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label for="nombreMascota">Nombre de la mascota</label>
+      <input type="text" id="nombreMascota" name="nombreMascota"
+             ng-model="cita.nombreMascota"
+             required maxlength="100" placeholder="Ej: Firulais">
+      <span class="field-error"
+            ng-show="citaForm.nombreMascota.$touched && citaForm.nombreMascota.$error.required">
+        Campo obligatorio
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label for="numeroTelefono">Telefono</label>
+      <input type="tel" id="numeroTelefono" name="numeroTelefono"
+             ng-model="cita.numeroTelefono"
+             required minlength="10" maxlength="20" placeholder="Ej: 5512345678">
+      <span class="field-error"
+            ng-show="citaForm.numeroTelefono.$touched && citaForm.numeroTelefono.$error.required">
+        Campo obligatorio
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label for="razonCita">Motivo de la cita</label>
+      <textarea id="razonCita" name="razonCita"
+                ng-model="cita.razonCita"
+                required maxlength="500" rows="3" placeholder="Ej: Vacunacion anual"></textarea>
+      <span class="field-error"
+            ng-show="citaForm.razonCita.$touched && citaForm.razonCita.$error.required">
+        Campo obligatorio
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label for="fechaCita">Fecha y hora</label>
+      <input type="datetime-local" id="fechaCita" name="fechaCita"
+             ng-model="cita.fechaCita" required>
+      <span class="field-error"
+            ng-show="citaForm.fechaCita.$touched && citaForm.fechaCita.$error.required">
+        Campo obligatorio
+      </span>
+    </div>
+
+    <button type="submit" ng-disabled="citaForm.$invalid || enviando">
+      {{ enviando ? 'Enviando...' : 'Agendar Cita' }}
+    </button>
+
+  </form>
+
+  <p class="back-link"><a href="#!/">Volver al inicio</a></p>
+</section>

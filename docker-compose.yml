@@ -76,5 +76,16 @@ services:
       - eureka-server
     restart: unless-stopped
 
+  frontend:
+    container_name: patitas-frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "4200:80"
+    depends_on:
+      - api-gateway
+    restart: unless-stopped
+
 volumes:
   oracle-data:
