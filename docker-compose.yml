@@ -25,6 +25,19 @@ services:
       - "8761:8761"
     restart: unless-stopped
 
+  api-gateway:
+    container_name: patitas-gateway
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    ports:
+      - "9090:9090"
+    environment:
+      - EUREKA_URL=http://eureka-server:8761/eureka/
+    depends_on:
+      - eureka-server
+    restart: unless-stopped
+
   backend:
     container_name: patitas-backend
     build:
