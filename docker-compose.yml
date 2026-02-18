@@ -1,0 +1,91 @@
+version: "3.8"
+
+services:
+  oracle-db:
+    image: gvenzl/oracle-xe:21-slim
+    container_name: patitas-db
+    environment:
+      - ORACLE_PASSWORD=${DB_ROOT_PASSWORD}
+      - APP_USER=${DB_USER}
+      - APP_USER_PASSWORD=${DB_PASSWORD}
+    ports:
+      - "1521:1521"
+    volumes:
+      - oracle-data:/opt/oracle/oradata
+    restart: unless-stopped
+    healthcheck:
+      disable: true
+
+  eureka-server:
+    container_name: patitas-eureka
+    build:
+      context: ./eureka-server
+      dockerfile: Dockerfile
+    ports:
+      - "8761:8761"
+    restart: unless-stopped
+
+  auth-server:
+    container_name: patitas-auth
+    build:
+      context: ./auth-server
+      dockerfile: Dockerfile
+    ports:
+      - "9000:9000"
+    environment:
+      - TZ=America/Mexico_City
+      - SPRING_DATASOURCE_URL=jdbc:oracle:thin:@oracle-db:1521/XEPDB1
+      - SPRING_DATASOURCE_USERNAME=${DB_USER}
+      - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - EUREKA_URL=http://eureka-server:8761/eureka/
+    depends_on:
+      - oracle-db
+      - eureka-server
+    restart: unless-stopped
+
+  api-gateway:
+    container_name: patitas-gateway
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    ports:
+      - "9090:9090"
+    environment:
+      - EUREKA_URL=http://eureka-server:8761/eureka/
+    depends_on:
+      - eureka-server
+    restart: unless-stopped
+
+  backend:
+    container_name: patitas-backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - TZ=America/Mexico_City
+      - SPRING_DATASOURCE_URL=jdbc:oracle:thin:@oracle-db:1521/XEPDB1
+      - SPRING_DATASOURCE_USERNAME=${DB_USER}
+      - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - EUREKA_URL=http://eureka-server:8761/eureka/
+    depends_on:
+      - oracle-db
+      - eureka-server
+    restart: unless-stopped
+
+  frontend:
+    container_name: patitas-frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "4200:80"
+    depends_on:
+      - api-gateway
+    restart: unless-stopped
+
+volumes:
+  oracle-data:

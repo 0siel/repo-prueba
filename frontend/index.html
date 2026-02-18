@@ -1,0 +1,50 @@
+<!doctype html>
+<html ng-app="patitasApp">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Veterinaria Patitas</title>
+    <meta name="description" content="Clínica veterinaria Patitas - Agenda tu cita en línea.">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+
+    <header class="navbar" ng-controller="NavbarController">
+      <h1><a href="#!/" class="navbar-brand">Veterinaria Patitas 🐾</a></h1>
+      <nav>
+        <span ng-if="estaLogueado()" class="navbar-user">
+          <a href="#!/dashboard" class="navbar-link">Panel</a>
+          <span class="navbar-username">{{ obtenerUsuario() }}</span>
+          <button class="btn-login" ng-click="cerrarSesion()">Cerrar Sesión</button>
+        </span>
+        <a href="#!/login" class="btn-login" ng-if="!estaLogueado()">Iniciar Sesión</a>
+      </nav>
+    </header>
+
+    <div ng-view></div>
+
+    <footer class="footer">
+      <p>&copy; 2026 Veterinaria Patitas. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
+
+    <script src="app.js"></script>
+    <script src="app.constants.js"></script>
+    <script src="app.routes.js"></script>
+
+    <script src="services/auth.service.js"></script>
+    <script src="services/auth.interceptor.js"></script>
+    <script src="services/estado.helper.js"></script>
+    <script src="services/error.helper.js"></script>
+
+    <script src="controllers/home.controller.js"></script>
+    <script src="controllers/cita.controller.js"></script>
+    <script src="controllers/consultar.controller.js"></script>
+    <script src="controllers/login.controller.js"></script>
+    <script src="controllers/dashboard.controller.js"></script>
+    <script src="controllers/navbar.controller.js"></script>
+
+  </body>
+</html>

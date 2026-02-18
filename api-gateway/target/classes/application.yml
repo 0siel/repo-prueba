@@ -1,0 +1,24 @@
+server:
+  port: 9090
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: citas-service-route
+
+          uri: lb://citas-service
+          predicates:
+            - Path=/api/citas/**, /api/hola/**
+
+        - id: auth-server-route
+          uri: lb://auth-server
+          predicates:
+            - Path=/auth/**
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka/}

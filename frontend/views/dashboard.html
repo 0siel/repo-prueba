@@ -1,0 +1,87 @@
+<section class="dashboard-section">
+  <h2>Panel de Citas</h2>
+
+  <div class="alert alert-error" ng-if="error">
+    {{ error }}
+  </div>
+
+  <div class="alert alert-success" ng-if="exito">
+    {{ exito }}
+  </div>
+
+  <p ng-if="cargando">Cargando citas...</p>
+
+  <p ng-if="!cargando && citas.length === 0">No hay citas registradas.</p>
+
+  <div class="tabla-container" ng-if="citas.length > 0">
+    <table class="citas-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Cliente</th>
+          <th>Mascota</th>
+          <th>Teléfono</th>
+          <th>Fecha</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="cita in citas | orderBy:'fechaCita'">
+          <td>{{ cita.id }}</td>
+          <td>{{ cita.nombreCliente }}</td>
+          <td>{{ cita.nombreMascota }}</td>
+          <td>{{ cita.numeroTelefono }}</td>
+          <td>{{ cita.fechaCita | date:'dd/MM/yyyy HH:mm' }}</td>
+          <td>
+            <span class="badge" ng-class="badgeClass(cita.estadoCita)">{{ cita.estadoCita }}</span>
+          </td>
+          <td class="acciones">
+            <select ng-model="cita.nuevoEstado"
+                    ng-change="cambiarEstado(cita)"
+                    ng-init="cita.nuevoEstado = cita.estadoCita">
+              <option value="PENDIENTE">Pendiente</option>
+              <option value="ATENDIDA">Atendida</option>
+              <option value="CANCELADA">Cancelada</option>
+            </select>
+            <button class="btn-editar" ng-click="abrirEdicion(cita)">Editar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="modal-overlay" ng-if="editando" ng-click="cerrarEdicion()">
+    <div class="modal" ng-click="$event.stopPropagation()">
+      <h3>Editar Cita #{{ citaEditada.id }}</h3>
+
+      <form ng-submit="guardarEdicion()">
+        <div class="form-group">
+          <label>Cliente</label>
+          <input type="text" ng-model="citaEditada.nombreCliente" required>
+        </div>
+        <div class="form-group">
+          <label>Mascota</label>
+          <input type="text" ng-model="citaEditada.nombreMascota" required>
+        </div>
+        <div class="form-group">
+          <label>Teléfono</label>
+          <input type="tel" ng-model="citaEditada.numeroTelefono" required>
+        </div>
+        <div class="form-group">
+          <label>Motivo</label>
+          <textarea ng-model="citaEditada.razonCita" required rows="2"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Fecha y hora</label>
+          <input type="datetime-local" ng-model="citaEditada.fechaCita" required>
+        </div>
+
+        <div class="modal-actions">
+          <button type="submit">Guardar</button>
+          <button type="button" class="btn-cancelar" ng-click="cerrarEdicion()">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
