@@ -13,6 +13,11 @@ spring:
           predicates:
             - Path=/api/citas/**, /api/hola/**
 
+        - id: auth-server-route
+          uri: lb://auth-server
+          predicates:
+            - Path=/auth/**
+
 eureka:
   client:
     serviceUrl:

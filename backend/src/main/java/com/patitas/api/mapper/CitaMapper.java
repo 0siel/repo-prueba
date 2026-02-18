@@ -16,8 +16,9 @@ public class CitaMapper {
         cita.setNombreCliente(request.nombreCliente());
         cita.setNombreMascota(request.nombreMascota());
         cita.setRazonCita(request.razonCita());
+        cita.setNumeroTelefono(request.numeroTelefono());
         cita.setFechaCita(request.fechaCita());
-        
+        cita.setEstadoCita(request.estadoCita());
         return cita;
     }
 
@@ -29,6 +30,7 @@ public class CitaMapper {
             entity.getNombreCliente(),
             entity.getNombreMascota(),
             entity.getRazonCita(),
+            entity.getNumeroTelefono(),
             entity.getFechaCita(),
             entity.getEstadoCita()
         );
@@ -39,6 +41,7 @@ public class CitaMapper {
         entity.setNombreCliente(request.nombreCliente());
         entity.setNombreMascota(request.nombreMascota());
         entity.setRazonCita(request.razonCita());
+        entity.setNumeroTelefono(request.numeroTelefono());
         entity.setFechaCita(request.fechaCita());
         
         if (request.estadoCita() != null) {

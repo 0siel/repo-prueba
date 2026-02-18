@@ -46,7 +46,10 @@ public class Cita {
 	@NotBlank(message = "La razón de la cita es obligatoria")
 	@Size(max = 500, message = "La razón de la cita no debe exceder los 500 caracteres")
 	@Column(name = "razon_cita", nullable = false, length = 500 )
-	private String razonCita;
+  private String razonCita;
+
+  @Column(name = "numero_telefono", nullable = false, length = 20)
+  private String numeroTelefono;
 	
 	@NotNull(message = "El estado de la cita es obligatorio")
 	@Enumerated(EnumType.STRING)

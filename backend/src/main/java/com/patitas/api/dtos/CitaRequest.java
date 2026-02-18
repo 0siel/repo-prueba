@@ -24,6 +24,10 @@ String nombreMascota,
 @NotBlank(message = "La razón de la cita es obligatoria")
 @Size(max = 500)
 String razonCita,
+        
+@NotBlank(message = "El número de teléfono es obligatorio")
+@Size(min = 10, max = 20, message = "El teléfono debe tener entre 10 y 20 caracteres")
+String numeroTelefono,
 
 @NotNull(message = "La fecha es obligatoria")
 @FutureOrPresent(message = "La fecha debe ser presente o futura")

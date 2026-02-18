@@ -9,6 +9,7 @@ public record CitaResponse(
     String nombreCliente,
     String nombreMascota,
     String razonCita,
+    String numeroTelefono,
     LocalDateTime fechaCita,
     EstadoCita estadoCita
     
